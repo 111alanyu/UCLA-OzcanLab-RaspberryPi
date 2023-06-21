@@ -404,7 +404,7 @@ class PhotoBoothApp:
 
         self.thread.start()
 
-    def getFrame(self):
+    def get_frame(self):
         return self.panelR
     
     def takeControl(self):
