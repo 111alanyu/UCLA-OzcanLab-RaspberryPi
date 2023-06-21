@@ -246,10 +246,6 @@ class PhotoBoothApp:
         self.panel = Label(frame)
         self.panel.pack(side="left", padx=10, pady=10)
 
-        # create a button to capture a photo
-        btn = Button(frame, text="Capture", command=self.take_photo)
-        btn.pack(side="left", padx=10, pady=10)
-
         # create a label to display the photo count
         self.lbl_count = Label(frame, text="Photos: 0")
         self.lbl_count.pack(side="left", padx=10, pady=10)

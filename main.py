@@ -27,7 +27,8 @@ def main():
     args = vars(ap.parse_args())
     vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
     
-    frame1 = PhotoBoothApp(vs, args["output"], root)
+    pba = PhotoBoothApp(vs, args["output"], root)
+    frame1 = pba.get_frame()
     frame2 = ttk.Frame(notebook, width=400, height=280)
 
 
