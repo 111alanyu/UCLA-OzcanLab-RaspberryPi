@@ -26,7 +26,7 @@ def main():
     args = vars(ap.parse_args())
     
     pba = PhotoBoothApp(args["output"], root, args)
-    frame1 = pba.get_frame()
+    frame1 = pba.getFrame()
     frame2 = ttk.Frame(notebook, width=400, height=280)
 
 

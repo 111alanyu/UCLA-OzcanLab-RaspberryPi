@@ -50,9 +50,7 @@ import time
 
 # initialize the video stream and allow the camera sensor to warmup
 
-print("[INFO] warming up camera...")
-print(args["picamera"] )
-vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
+
 
 # vs = cv2.VideoCapture(-1, cv2.CAP_V4L)
 # vs = VideoStream(-1).start()
@@ -89,21 +87,21 @@ class PhotoBoothApp:
 
     def write(self, n):
         GPIO.output(self.sdi, n == 1)
-        self.toggleself.clk()
+        self.toggleclk()
         GPIO.output(self.sdi, n == 1)
-        self.toggleself.clk()
+        self.toggleclk()
         GPIO.output(self.sdi, n == 1)
-        self.toggleself.clk()
+        self.toggleclk()
         GPIO.output(self.sdi, n == 1)
-        self.toggleself.clk()
+        self.toggleclk()
         GPIO.output(self.sdi, n == 2)
-        self.toggleself.clk()
+        self.toggleclk()
         GPIO.output(self.sdi, n == 2)
-        self.toggleself.clk()
+        self.toggleclk()
         GPIO.output(self.sdi, n == 2)
-        self.toggleself.clk()
+        self.toggleclk()
         GPIO.output(self.sdi, n == 2)
-        self.toggleself.clk()
+        self.toggleclk()
         self.toOutput()
 
     def toOutput(self):
@@ -112,7 +110,7 @@ class PhotoBoothApp:
         time.sleep(2)
         #GPIO.output(self.oe, 1)
 
-    def __init__(self, vs, outputPath, parent):
+    def __init__(self, outputPath, parent, args):
 
         # store the video stream object and output path, then initialize
 
@@ -120,18 +118,19 @@ class PhotoBoothApp:
 
         # the thread stop event
 
-        self.self.sdi = 5
+        self.sdi = 5
         self.clk = 6
         self.le = 26
         self.oe = 16
         self.clock = 200
         GPIO.setwarnings(False)
 
+        self.vs = VideoStream(usePiCamera=args["picamera"] >0).start()
         self.parent = parent
 
         self.setup()
         
-        self.vs = vs
+
 
         self.outputPath = outputPath
 
@@ -399,7 +398,7 @@ class PhotoBoothApp:
         return self.panelR
     
 
-    
+   
     def takeControl(self):
 
         # grab the current timestamp and use it to construct the
