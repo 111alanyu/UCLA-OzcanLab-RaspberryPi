@@ -53,25 +53,12 @@ GPIO.setwarnings(False)
 
 # construct the argument parse and parse the arguments/home/pi/cameraCaptrure_timelapse_background.py
 
-ap = argparse.ArgumentParser()
 
-ap.add_argument("-o", "--output", required=True,
-
-help="path to output directory to store snapshots")
-
-ap.add_argument("-p", "--picamera", type=int, default=-1,
-
-help="whether or not the Raspberry Pi camera should be used")
-
-args = vars(ap.parse_args())
 
 
 
 # initialize the video stream and allow the camera sensor to warmup
 
-print("[INFO] warming up camera...")
-print(args["picamera"] )
-vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
 
 # vs = cv2.VideoCapture(-1, cv2.CAP_V4L)
 # vs = VideoStream(-1).start()
@@ -131,7 +118,7 @@ class PhotoBoothApp:
         time.sleep(2)
         #GPIO.output(oe, 1)
 
-    def __init__(self, vs, outputPath, parent):
+    def __init__(self, outputPath, parent, args):
 
         # store the video stream object and output path, then initialize
 
@@ -139,11 +126,15 @@ class PhotoBoothApp:
 
         # the thread stop event
 
+        print("[INFO] warming up camera...")
+
+        print(args["picamera"] )
+        self.vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
+
         self.parent = parent
 
         self.setup()
         
-        self.vs = vs
 
         self.outputPath = outputPath
 

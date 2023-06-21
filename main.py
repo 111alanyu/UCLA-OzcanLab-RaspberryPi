@@ -23,11 +23,9 @@ def main():
 
     help="whether or not the Raspberry Pi camera should be used")
 
-
     args = vars(ap.parse_args())
-    vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
     
-    pba = PhotoBoothApp(vs, args["output"], root)
+    pba = PhotoBoothApp(args["output"], root, args)
     frame1 = pba.get_frame()
     frame2 = ttk.Frame(notebook, width=400, height=280)
 
