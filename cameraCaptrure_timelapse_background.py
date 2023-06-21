@@ -18,7 +18,7 @@ import tkinter as tki
 
 from tkinter import *
 
-import threading
+import threading 
 
 import datetime
 
@@ -27,6 +27,7 @@ import imutils
 import cv2
 
 import os
+
 
 
 
@@ -130,7 +131,7 @@ class PhotoBoothApp:
         time.sleep(2)
         #GPIO.output(oe, 1)
 
-    def __init__(self, vs, outputPath, parent):
+    def __init__(self, vs, outputPath):
 
         # store the video stream object and output path, then initialize
 
@@ -139,8 +140,6 @@ class PhotoBoothApp:
         # the thread stop event
         
         self.setup()
-        
-        self.parent = parent
         
         self.vs = vs
 
@@ -156,13 +155,13 @@ class PhotoBoothApp:
         self.picNum = 0
         # initialize the root window and image panel
 
-
+        self.root = tki.Tk()
 
         self.panel = None
 
 
 
-        self.panelR = Frame(self.parent)
+        self.panelR = Frame(self.root)
 
         self.panelR.pack(side = RIGHT )
 
@@ -236,12 +235,12 @@ class PhotoBoothApp:
 
         # set a callback to handle when the window is closed
 
-        self.parent.wm_title("PyImageSearch PhotoBooth")
+        self.root.wm_title("PyImageSearch PhotoBooth")
 
-        self.parent.wm_protocol("WM_DELETE_WINDOW", self.onClose)
+        self.root.wm_protocol("WM_DELETE_WINDOW", self.onClose)
         
     def getFrame(self):
-        frame = tki.Frame(self.parent)
+        frame = tki.Frame(self.root)
         return frame
 
 
@@ -499,29 +498,13 @@ class PhotoBoothApp:
 
         self.vs.stop()
 
-        self.parent.quit()
+        self.root.quit()
 
-    def get_frame(self):
-        frame = Frame(self.parent)
 
-        # create a panel to display the video feed
-        self.panel = Label(frame)
-        self.panel.pack(side="left", padx=10, pady=10)
-
-        # create a button to capture a photo
-        btn = Button(frame, text="Capture", command=self.take_photo)
-        btn.pack(side="left", padx=10, pady=10)
-
-        # create a label to display the photo count
-        self.lbl_count = Label(frame, text="Photos: 0")
-        self.lbl_count.pack(side="left", padx=10, pady=10)
-
-        # start a thread to continuously update the video feed
-        self.stopEvent = threading.Event()
-        self.thread = threading.Thread(target=self.video_loop, args=())
-        self.thread.start()
-
-        return frame
 
 
 # start the app
+
+#pba = PhotoBoothApp(vs, args["output"])
+
+#pba.root.mainloop()

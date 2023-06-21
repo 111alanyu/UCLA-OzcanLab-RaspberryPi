@@ -48,7 +48,7 @@ def main():
     notebook.add(frame1, text='Capture')
     notebook.add(frame2, text='Analysis')
 
-
+    print("Hello")
     root.mainloop()
 
 if __name__ == "__main__":
