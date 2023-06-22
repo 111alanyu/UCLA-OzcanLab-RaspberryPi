@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from cameraCaptrure_timelapse_background import PhotoBoothApp, VideoStream
+from cameraCaptrure_timelapse_background import *
 import argparse
 
 def main(): 
@@ -26,13 +26,9 @@ def main():
 
     args = vars(ap.parse_args())
     vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
-    pba = PhotoBoothApp(vs, args["output"])
     
-    frame1 = ttk.Frame(notebook, width=400, height=280)
+    frame1 = PhotoBoothApp(vs, args["output"], root)
     frame2 = ttk.Frame(notebook, width=400, height=280)
-
-
-    ui_root = pba.getFrame()
 
 
     # create frames
@@ -42,7 +38,7 @@ def main():
     frame2.pack(fill='both', expand=True)
 
 
-    text_label = tk.Label(ui_root, text="Capture")
+    text_label = tk.Label(frame1, text="Capture")
     text_label1 = tk.Label(frame2, text="Analysis")
 
     text_label.pack()
