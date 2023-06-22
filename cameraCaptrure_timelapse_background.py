@@ -43,22 +43,16 @@ import time
 import RPi.GPIO as GPIO #MUST CONNECT GND LED pin to ic pins. 
 import time
 
-sdi = 5
-clk = 6
-le = 26
-oe = 16
-clock = 200
-GPIO.setwarnings(False)
 
 
 # construct the argument parse and parse the arguments/home/pi/cameraCaptrure_timelapse_background.py
 
 
-
-
-
 # initialize the video stream and allow the camera sensor to warmup
 
+print("[INFO] warming up camera...")
+print(args["picamera"] )
+vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
 
 # vs = cv2.VideoCapture(-1, cv2.CAP_V4L)
 # vs = VideoStream(-1).start()
@@ -75,50 +69,50 @@ class PhotoBoothApp:
     
     def setup(self) :
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(sdi, GPIO.OUT)
-        GPIO.setup(clk, GPIO.OUT)
-        GPIO.setup(le, GPIO.OUT)
-        GPIO.setup(oe, GPIO.OUT)
+        GPIO.setup(self.sdi, GPIO.OUT)
+        GPIO.setup(self.clk, GPIO.OUT)
+        GPIO.setup(self.le, GPIO.OUT)
+        GPIO.setup(self.oe, GPIO.OUT)
         
 
     def toggleLE(self):
-        GPIO.output(le, 1)
-        time.sleep(clock/1000000.0)
-        GPIO.output(le, 0)
-        time.sleep(clock/1000000.0)
+        GPIO.output(self.le, 1)
+        time.sleep(self.clock/1000000.0)
+        GPIO.output(self.le, 0)
+        time.sleep(self.clock/1000000.0)
 
-    def toggleCLK(self):
-        GPIO.output(clk, 0)
-        time.sleep(clock/1000000.0)
-        GPIO.output(clk, 1)
-        time.sleep(clock/1000000.0)
+    def toggleclk(self):
+        GPIO.output(self.clk, 0)
+        time.sleep(self.clock/1000000.0)
+        GPIO.output(self.clk, 1)
+        time.sleep(self.clock/1000000.0)
 
     def write(self, n):
-        GPIO.output(sdi, n == 1)
-        self.toggleCLK()
-        GPIO.output(sdi, n == 1)
-        self.toggleCLK()
-        GPIO.output(sdi, n == 1)
-        self.toggleCLK()
-        GPIO.output(sdi, n == 1)
-        self.toggleCLK()
-        GPIO.output(sdi, n == 2)
-        self.toggleCLK()
-        GPIO.output(sdi, n == 2)
-        self.toggleCLK()
-        GPIO.output(sdi, n == 2)
-        self.toggleCLK()
-        GPIO.output(sdi, n == 2)
-        self.toggleCLK()
+        GPIO.output(self.sdi, n == 1)
+        self.toggleself.clk()
+        GPIO.output(self.sdi, n == 1)
+        self.toggleself.clk()
+        GPIO.output(self.sdi, n == 1)
+        self.toggleself.clk()
+        GPIO.output(self.sdi, n == 1)
+        self.toggleself.clk()
+        GPIO.output(self.sdi, n == 2)
+        self.toggleself.clk()
+        GPIO.output(self.sdi, n == 2)
+        self.toggleself.clk()
+        GPIO.output(self.sdi, n == 2)
+        self.toggleself.clk()
+        GPIO.output(self.sdi, n == 2)
+        self.toggleself.clk()
         self.toOutput()
 
     def toOutput(self):
         self.toggleLE()
-        GPIO.output(oe, 0)
+        GPIO.output(self.oe, 0)
         time.sleep(2)
-        #GPIO.output(oe, 1)
+        #GPIO.output(self.oe, 1)
 
-    def __init__(self, outputPath, parent, args):
+    def __init__(self, vs, outputPath, parent):
 
         # store the video stream object and output path, then initialize
 
@@ -126,15 +120,18 @@ class PhotoBoothApp:
 
         # the thread stop event
 
-        print("[INFO] warming up camera...")
-
-        print(args["picamera"] )
-        self.vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
+        self.self.sdi = 5
+        self.clk = 6
+        self.le = 26
+        self.oe = 16
+        self.clock = 200
+        GPIO.setwarnings(False)
 
         self.parent = parent
 
         self.setup()
         
+        self.vs = vs
 
         self.outputPath = outputPath
 
@@ -395,8 +392,13 @@ class PhotoBoothApp:
 
         self.thread.start()
 
-    def get_frame(self):
+    '''
+    These get functions
+    '''
+    def getFrame(self):
         return self.panelR
+    
+
     
     def takeControl(self):
 
