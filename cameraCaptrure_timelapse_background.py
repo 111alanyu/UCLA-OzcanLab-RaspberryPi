@@ -239,23 +239,6 @@ class PhotoBoothApp:
 
         self.parent.wm_protocol("WM_DELETE_WINDOW", self.onClose)
         
-    def get_frame(self):
-        frame = Frame(self.parent)
-
-        # create a panel to display the video feed
-        self.panel = Label(frame)
-        self.panel.pack(side="left", padx=10, pady=10)
-
-        # create a label to display the photo count
-        self.lbl_count = Label(frame, text="Photos: 0")
-        self.lbl_count.pack(side="left", padx=10, pady=10)
-
-        # start a thread to continuously update the video feed
-        self.stopEvent = threading.Event()
-        self.thread = threading.Thread(target=self.video_loop, args=())
-        self.thread.start()
-
-        return frame
 
     def videoLoop(self):
         self.write(1)
@@ -421,6 +404,9 @@ class PhotoBoothApp:
 
         self.thread.start()
 
+    def getFrame(self):
+        return self.panelR
+    
     def takeControl(self):
 
         # grab the current timestamp and use it to construct the
