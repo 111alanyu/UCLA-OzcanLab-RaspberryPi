@@ -21,7 +21,7 @@ def main():
 
     ap.add_argument("-p", "--picamera", type=int, default=-1,
 
-    help="whether or not the Raspberry Pi camera should be used")
+    help="whether or not the Raspberry Pi camerashould be used")
 
     args = vars(ap.parse_args())
     
