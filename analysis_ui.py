@@ -9,6 +9,7 @@ class MyFrame(tk.Frame):
         self.gap_val = None
         self.num_of_imgs_val = None
         self.path_val = None
+        self.segment_val = None
         
         self.exp = tk.Label(self, text = "Exp")
         self.exp.pack()
@@ -30,6 +31,11 @@ class MyFrame(tk.Frame):
         self.path_entry = tk.Entry(self)
         self.path_entry.pack()
         
+        self.segment = tk.Label(self, text = "Segment")
+        self.segment.pack()
+        self.segment_entry = tk.Entry(self)
+        self.segment_entry.pack()
+        
         self.begin_anal_button = tk.Button(self, text = "Begin Analysis", command = self.pool_input)
         self.begin_anal_button.pack()
         
@@ -38,11 +44,13 @@ class MyFrame(tk.Frame):
         self.gap_val = self.gap_entry.get()
         self.num_of_imgs_val = self.num_of_imgs_entry.get()
         self.path_val = self.path_entry.get()
+        self.segment_val = self.segment_entry.get()
         
         print(self.exp_val)
         print(self.gap_val)
         print(self.num_of_imgs_val)
         print(self.path_val)
+        print(self.segment_val)
         
         
         
