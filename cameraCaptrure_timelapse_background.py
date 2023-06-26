@@ -58,11 +58,6 @@ import time
 time.sleep(2.0)
 
 
-
-
-
-
-
 class PhotoBoothApp:
     
     def setup(self) :
@@ -123,6 +118,7 @@ class PhotoBoothApp:
         self.le = 26
         self.oe = 16
         self.clock = 200
+        self.args = args
         GPIO.setwarnings(False)
 
         self.vs = VideoStream(usePiCamera=args["picamera"] >0).start()
@@ -316,7 +312,6 @@ class PhotoBoothApp:
         ts = datetime.datetime.now()
 
         filename = "{}.jpg".format(ts.strftime("%Y-%m-%d_%H-%M-%S"))
-
         self.stopEvent.set()
         self.write(1)
 
@@ -327,13 +322,12 @@ class PhotoBoothApp:
         for i in range(int(inNumP)):
             start = time.perf_counter_ns()
             filename = str(i)+ "_" + str(expT[i % expT_rep]) + "_"  +"{}_b1.jpg".format(ts.strftime("%Y-%m-%d_%H-%M-%S"))
-            
+            print("@@@" + filename)
             #filename = str(int(expT[i]))+"s_b256.jpg"
             
             p = os.path.sep.join((self.outputPath, filename))         
-
+            print("###" + p)
             if (len(expT) >= int(inNumP)):
-
                 os.system("raspistill -md 0 -bm -ex off -ag 1 -dg 1 --shutter "+str(expT[i % expT_rep]*1000000)+" -st -t 100 -r -o "+p)
                 #os.system("dcraw -v -o 1 -W -b 1 -q 3 -6 -T " + p)
                 # os.system("convert " + p[:len(p)-4] + ".tiff" + " -separate " + p[:len(p)-4] + "_%d.tiff")
@@ -341,7 +335,7 @@ class PhotoBoothApp:
                 
                 
             else:
-
+                
                 os.system("raspistill -md 0 -bm -ex off -ag 1 -dg 1 --shutter "+str(expT[i % expT_rep]*1000000)+" -st -t 100 -r -o "+p)
                 #os.system("dcraw -v -o 1 -W -b 1 -q 3 -6 -T " + p)
                 # os.system("convert " + p[:len(p)-4] + ".tiff" + " -separate " + p[:len(p)-4] + "_%d.tiff")
@@ -383,7 +377,7 @@ class PhotoBoothApp:
         
         
         
-        self.vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
+        self.vs = VideoStream(usePiCamera=self.args["picamera"] > 0).start()
         
         self.stopEvent.clear()
 
@@ -412,7 +406,7 @@ class PhotoBoothApp:
         inTimeBc = self.txtTimeBC.get("1.0", "end")
 
         #expT = int(inExpTxt)*1000*1000
-
+        quantify_VFA_timelapse_decap
         expT = [float(x.strip()) for x in inExpTxt.split(',')]
 
         expTBC = [float(x.strip()) for x in inTimeBc.split(',')]

@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
 from cameraCaptrure_timelapse_background import *
+from quantify_VFA_timelapse_decap import *
+from analysis_ui import *
 import argparse
 
 def main(): 
     # root window
     root = tk.Tk()
-    root.geometry('400x300')
+    root.geometry('800x400')
     root.title('Notebook Demo')
 
     # create a notebook
@@ -27,27 +29,19 @@ def main():
     
     pba = PhotoBoothApp(args["output"], root, args)
     frame1 = pba.getFrame()
-    frame2 = ttk.Frame(notebook, width=400, height=280)
-
-
-    # create frames
-
-
+    
+    frame2 = MyFrame(notebook)
+    
     frame1.pack(fill='both', expand=True)
-    frame2.pack(fill='both', expand=True)
 
-
-    text_label = tk.Label(frame1, text="Capture")
-    text_label1 = tk.Label(frame2, text="Analysis")
-
-    text_label.pack()
-    text_label1.pack()
     # add frames to notebook
+    
 
     notebook.add(frame1, text='Capture')
     notebook.add(frame2, text='Analysis')
 
-
+    notebook.pack(fill="both", expand=True)
+    
     root.mainloop()
 
 if __name__ == "__main__":
