@@ -8,7 +8,7 @@ import argparse
 def main(): 
     # root window
     root = tk.Tk()
-    root.geometry('800x400')
+    root.geometry('500x1000')
     root.title('Notebook Demo')
 
     # create a notebook
