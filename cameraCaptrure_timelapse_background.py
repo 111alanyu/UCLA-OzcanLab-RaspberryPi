@@ -379,7 +379,7 @@ class PhotoBoothApp:
             else:
                 total_time = total_time + 0.1
                 time.sleep(0.1)                   
-            '''
+    '''
         
         
         

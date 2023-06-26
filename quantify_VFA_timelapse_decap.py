@@ -123,7 +123,7 @@ def getCircleData(imagePath, image_name, image_num, current_Point_Map, displayCi
     #include only for RGB input images
     if image_num == 0:
         
-        image = image[:, :, 2]
+        image = image[:, :, 1]
     else:
         image = image[:, :, 1]
         
