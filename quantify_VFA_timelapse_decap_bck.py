@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import csv
 import time
-from alan.helpers_timelapse_decap_bck import drawCirclesAndLabels, \
+from helpers_timelapse_decap_bck import drawCirclesAndLabels, \
    localizeWithCentroid, getStats, generateMask, localize_spots, findAngle_and_ScaleFactor_spots, rotateandscale_fromSpots, draw_alignmentspots
 
 # This is for reading the images that are in the fluorescent/ directory
