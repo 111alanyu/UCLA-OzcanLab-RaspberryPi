@@ -201,7 +201,8 @@ class PhotoBoothApp:
         btn2.pack(side="bottom", fill="both", expand="yes", padx=10,
 
         pady=10)
-
+        
+        
 
 
         # start a thread that constantly pools the video sensor for

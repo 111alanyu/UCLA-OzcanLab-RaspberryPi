@@ -324,6 +324,48 @@ def main():
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
+def main_ui_analysis(args):
+    global show_mask
+    while (1):
+        folder_name = args
+        if folder_name == 'quit':
+            return
+        elif folder_name == 'help':
+            print('\tThe image folder should exist within the same directory the script is run from.\n' +
+                '\tTo toggle statistics, enter a string of binary digits ' +
+                '(separated by a comma) corresponding to\n' +
+                '\t\t[Std, Mean, Max, Min]\n' +
+                '\tFor example, entering \'this_folder, 1100\' ' +
+                'returns the Standard Deviation and the Mean.\n\tMean is taken by default (\'0100\').\n' +
+                '\tTo set the radius, type \'r=[your value here]\' separated by a comma. Ex: \'folder,r=45,1111\'.\n\tThe default radius is 60px.\n' +
+                '\tTo display spot masks as they\'re generated, type \'mask=1\'. Turn it off with \'mask=0\'.')
+        # Change to true to display images with circles drawn on
+        else:
+            folder_name = (folder_name.replace(" ", "")).split(',')
+            if len(folder_name) >= 2:
+                extra_commands = folder_name[1:]
+                radius = MASK_RADIUS
+                metrics = '0100'
+                for com in extra_commands:
+                    if com[:2] == 'r=':
+                        if com[2:].isnumeric():
+                            radius = int(com[2:])
+                        else:
+                            print('\tInvalid radius. Type \'help\'')
+                    elif com[:5] == 'mask=':
+                        if com[5].isnumeric() and len(com)==6:
+                            show_mask = int(com[5])
+                        else:
+                            print('\tInvalid mask setting. Type \'help\'')
+                    elif com.isnumeric():
+                        metrics = com
+                    else:
+                        print('\tInvalid setting input. Type \'help\'')
+                averagesOfAllImages(False, folder_name[0], metrics, int(radius))
+            else:
+                averagesOfAllImages(False, folder_name[0])
+        return
+
 
 if __name__ == '__main__':
     main()
