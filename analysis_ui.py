@@ -49,9 +49,15 @@ class MyFrame(tk.Frame):
         self.resized_image = self.image.resize((500,400))
         self.image_tk = ImageTk.PhotoImage(self.resized_image)
         self.image_label = tk.Label(self, image=self.image_tk)
-        self.image_label.grid(row = 3, column = 0, columnspan = 3)
+        self.image_label.grid(row = 3, column = 1, columnspan = 3)
         
+        self.next_img = tk.Button(self, text = "Next", command = self.change_image)
+        self.next_img.grid(row = 3, column = 4, columnspan = 1)
         
+        self.next_img = tk.Button(self, text = "Prev", command = self.change_image_back)
+        self.next_img.grid(row = 3, column = 0, columnspan = 1)
+        
+        self.curr_count = 0
         
     
     
@@ -82,14 +88,34 @@ class MyFrame(tk.Frame):
         main_ui_analysis(self.file_path)
         
         self.process_image = self.file_path + "/processed_jpgs"
-        image_address = [os.path.join(self.process_image, file) for file in os.listdir(self.process_image)]
+        self.image_address = [os.path.join(self.process_image, file) for file in os.listdir(self.process_image)]
         
-        self.image = Image.open(image_address[0])
+        self.image = Image.open(self.image_address[0])
         self.resized_image = self.image.resize((500,500))
         self.image_tk = ImageTk.PhotoImage(self.resized_image)
         self.image_label = tk.Label(self, image=self.image_tk)
-        self.image_label.grid(row = 3, column = 0, columnspan = 3)
+        self.image_label.grid(row = 3, column = 1, columnspan = 3)
         
+    def change_image(self):
+        if(self.image_address == None):
+            print("No Images to Display")
+        self.curr_count += 1
+        self.image = Image.open(self.image_address[self.curr_count % len(self.image_address)])
+        self.resized_image = self.image.resize((500,500))
+        self.image_tk = ImageTk.PhotoImage(self.resized_image)
+        self.image_label = tk.Label(self, image=self.image_tk)
+        self.image_label.grid(row = 3, column = 1, columnspan = 3)
+        
+    def change_image_back(self):
+        if(self.image_address == None):
+            print("No Images to Display")
+        self.curr_count -= 1
+        self.image = Image.open(self.image_address[self.curr_count % len(self.image_address)])
+        self.resized_image = self.image.resize((500,500))
+        self.image_tk = ImageTk.PhotoImage(self.resized_image)
+        self.image_label = tk.Label(self, image=self.image_tk)
+        self.image_label.grid(row = 3, column = 1, columnspan = 3)
+       
     def pool_input(self):
         self.path_val = self.path_entry.get()
         self.segment_val = self.segment_entry.get()
