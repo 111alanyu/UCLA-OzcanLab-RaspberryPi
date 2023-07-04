@@ -128,7 +128,7 @@ def getCircleData(imagePath, image_name, image_num, current_Point_Map, displayCi
         
     #image = image[:, :, 1]
     #include if you need rotation
-    image = cv2.rotate(image, cv2.ROTATE_180)
+    #image = cv2.rotate(image, cv2.ROTATE_180)
     
     image_o = image.copy()
     image = image[YMIN_BOUND: YMAX_BOUND, XMIN_BOUND: XMAX_BOUND]

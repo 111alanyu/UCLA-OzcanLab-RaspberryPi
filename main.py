@@ -30,7 +30,7 @@ def main():
     pba = PhotoBoothApp(args["output"], root, args)
     frame1 = pba.getFrame()
     
-    frame2 = MyFrame(notebook)
+    frame2 = MyFrame(notebook, pba)
     
     frame1.pack(fill='both', expand=True)
 

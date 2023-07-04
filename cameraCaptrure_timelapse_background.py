@@ -104,6 +104,9 @@ class PhotoBoothApp:
         GPIO.output(self.oe, 0)
         time.sleep(2)
         #GPIO.output(self.oe, 1)
+        
+    def get_file(self):
+        return self.current_file
 
     def __init__(self, outputPath, parent, args):
 
@@ -112,7 +115,10 @@ class PhotoBoothApp:
         # the most recently read frame, thread for reading frames, and
 
         # the thread stop event
-
+        
+        
+        self.current_file = None
+        
         self.sdi = 5
         self.clk = 6
         self.le = 26
@@ -126,7 +132,6 @@ class PhotoBoothApp:
 
         self.setup()
         
-
 
         self.outputPath = outputPath
 
@@ -224,7 +229,8 @@ class PhotoBoothApp:
         self.parent.wm_protocol("WM_DELETE_WINDOW", self.onClose)
         
 
-    def videoLoop(self):
+    def videoLoop(self):  #ALAN THIS IS WHERE THEY DECLARE THE VIDEO!!!
+        #TODO: Make it show up in the correct location. 
         self.write(1)
 
         # DISCLAIMER:
@@ -320,6 +326,22 @@ class PhotoBoothApp:
 
         expT_rep = 1
         total_time = 0
+        
+        
+        self.timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+        self.directory_name = f"output_data_{self.timestamp}"
+        self.outputPath = self.outputPath + "/" + self.directory_name
+        os.mkdir(self.outputPath)
+        self.current_file = self.outputPath 
+        self.outputPath += "/img"
+        os.mkdir(self.outputPath)
+        
+        
+        
+        print("^^^" + self.outputPath)
+        
+        
+                
         for i in range(int(inNumP)):
             start = time.perf_counter_ns()
             filename = str(i)+ "_" + str(expT[i % expT_rep]) + "_"  +"{}_b1.jpg".format(ts.strftime("%Y-%m-%d_%H-%M-%S"))
