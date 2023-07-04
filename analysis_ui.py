@@ -30,7 +30,6 @@ class MyFrame(tk.Frame):
         
         self.columnconfigure(1, weight = 1)
         
-        self.tiff_directory = None
         
         '''capture_object
         self.checkbox_var = tk.IntVar()
@@ -58,31 +57,25 @@ class MyFrame(tk.Frame):
     
     def convert_to_tiff(self):
         self.directory = self.capture_object.get_file()
+        brightnesses = [1]
+
+        print(self.directory)
         
         if(not self.directory):
             print("Capture was not ran")
-            return
-        
-        self.img_directory = self.directory + "/img/"
-        self.tiff_directory = self.directory + "/tiff/"
-        os.mkdir(self.tiff_directory)
-        
-        
-        jpg_files = [f for f in os.listdir(self.img_directory) if f.endswith(".jpg")]
-        print(jpg_files)
-        
-        for i in jpg_files:
-            image = Image.open(self.img_directory + i)
-            image.save(self.tiff_directory + i[:-4] + ".tiff", "TIFF")
+                    
+        for file in glob.glob(self.directory + '/*.jpg'):
+            print(file)
+            os.system("dcraw -v -w -o 1 -W -b " + str(brightnesses[0]) + " -q 3 -6 -T " + file)
             
         
     
     def ui_holder(self):
         self.file_path = self.path_entry.get()
         if (not self.file_path):
-            if(not self.tiff_directory):
+            if(not self.directory):
                 print("No file")
-            self.file_path = self.tiff_directory[:-1]
+            self.file_path = self.directory
         
         print("$$$$" + (str)(self.file_path))
         

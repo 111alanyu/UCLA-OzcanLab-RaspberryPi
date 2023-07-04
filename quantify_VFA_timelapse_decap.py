@@ -220,8 +220,7 @@ def averagesOfAllImages(displayCirclesBool=False, test_directory_name="", stat_c
 
     ##Asserting that the directory input by user is valid and has images ending with .tif inside of it
     if (isdir(test_directory_path)):
-        imageList = [f for f in listdir(test_directory_path) if (isfile(join(test_directory_path, f))) and (
-                    f.endswith('.jpg') or f.endswith('.jpeg') or f.endswith('.dng') or f.endswith('.tiff'))]
+        imageList = [f for f in listdir(test_directory_path) if (isfile(join(test_directory_path, f))) and (f.endswith('.tiff'))]
         if (len(imageList) == 0):
             print("\tError: No images here, please check the directory")
             return

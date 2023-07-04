@@ -333,8 +333,6 @@ class PhotoBoothApp:
         self.outputPath = self.outputPath + "/" + self.directory_name
         os.mkdir(self.outputPath)
         self.current_file = self.outputPath 
-        self.outputPath += "/img"
-        os.mkdir(self.outputPath)
         
         
         
