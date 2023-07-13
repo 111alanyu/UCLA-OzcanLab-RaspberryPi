@@ -274,7 +274,7 @@ def averagesOfAllImages(displayCirclesBool=False, test_directory_name="", stat_c
             with open(test_directory_path + 'csv/' + command_dict[s] + '_r=' + str(r) + '_fixed.csv', 'w+', newline='') as f:
                 #thisMatrix = np.vstack([np.append(np.arange(NUM_SPOTS + 1), 'Error Flag'), matrix[:, :, j]])
                 writer = csv.writer(f)
-                writer.writerows(np.squeeze(matrix[:, :, j]))
+                writer.writerows(np.squeeze(np.transpose(matrix[:, :, j])))
             j += 1
     end = time.time()
     print('Average runtime: ' + str((end - start) / len(imageList)))
