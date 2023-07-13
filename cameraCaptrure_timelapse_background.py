@@ -296,7 +296,10 @@ class PhotoBoothApp:
         except RuntimeError as e:
 
             print("[INFO] caught a RuntimeError")
-
+    
+    def getinTimeBc(self):
+        return self.inTimeBc
+    
 
     def takeSnapshot(self):
 
@@ -308,7 +311,11 @@ class PhotoBoothApp:
 
         inExpTxt = self.txtExpT.get("0.0", "end")
 
-        inTimeBc = self.txtTimeBC.get("1.0", "end")
+        self.inTimeBc = self.txtTimeBC.get("1.0", "end")
+        
+        inTimeBc = self.inTimeBc
+        
+        print("^^^^^" + str(inTimeBc))
 
         #expT = int(inExpTxt)*1000*1000
 

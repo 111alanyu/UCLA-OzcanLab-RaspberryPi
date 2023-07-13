@@ -85,7 +85,8 @@ class MyFrame(tk.Frame):
         
         print("$$$$" + (str)(self.file_path))
         
-        main_ui_analysis(self.file_path)
+        print("~~~~" + (str)(self.capture_object.getinTimeBc))
+        main_ui_analysis(self.file_path, self.capture_object.getinTimeBc())
         
         self.process_image = self.file_path + "/processed_jpgs"
         self.image_address = [os.path.join(self.process_image, file) for file in os.listdir(self.process_image)]
@@ -110,7 +111,8 @@ class MyFrame(tk.Frame):
         if(self.image_address == None):
             print("No Images to Display")
         self.curr_count -= 1
-        self.image = Image.open(self.image_address[self.curr_count % len(self.image_address)])
+        
+        self.image = Image.open(self.image_address[self.curr_count])
         self.resized_image = self.image.resize((500,500))
         self.image_tk = ImageTk.PhotoImage(self.resized_image)
         self.image_label = tk.Label(self, image=self.image_tk)

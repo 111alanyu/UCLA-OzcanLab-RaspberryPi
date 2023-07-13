@@ -191,7 +191,7 @@ def getCircleData(imagePath, image_name, image_num, current_Point_Map, displayCi
     return output, pointMap, angleToRotate, scaleValue, alignment_spots_dict
 
 
-def averagesOfAllImages(displayCirclesBool=False, test_directory_name="", stat_commands='1100', r=MASK_RADIUS):
+def averagesOfAllImages(displayCirclesBool=False, test_directory_name="", stat_commands='1100', r=MASK_RADIUS, timeOffset = -1):
     '''
 
     This function simply runs the findAllCircleAveragesFor every image in our list.
@@ -276,7 +276,13 @@ def averagesOfAllImages(displayCirclesBool=False, test_directory_name="", stat_c
             with open(test_directory_path + 'csv/' + command_dict[s] + '_r=' + str(r) + '_fixed.csv', 'w+', newline='') as f:
                 #thisMatrix = np.vstack([np.append(np.arange(NUM_SPOTS + 1), 'Error Flag'), matrix[:, :, j]])
                 writer = csv.writer(f)
-                writer.writerows((np.insert(np.squeeze(np.transpose(matrix[:, :, j])), 0, left_column, axis = 1)))
+                transposed_left_col = np.squeeze(np.insert(np.transpose(matrix[:, :, j]), 0, left_column, axis = 1))
+                
+                interval = (int)(timeOffset)
+                for i in range(1, len(transposed_left_col[0])):
+                    transposed_left_col[0][i] = interval * (i - 1)
+                
+                writer.writerows(transposed_left_col)
             j += 1
     end = time.time()
     print('Average runtime: ' + str((end - start) / len(imageList)))
@@ -325,20 +331,20 @@ def main():
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-def main_ui_analysis(args):
+def main_ui_analysis(args, time):
     global show_mask
     folder_name = args
     if folder_name == 'quit':
         return
     elif folder_name == 'help':
         print('\tThe image folder should exist within the same directory the script is run from.\n' +
-            '\tTo toggle statistics, enter a string of binary digits ' +
+            '\tTo toggle statistics, enter a string of binary digitsgetinTimeBc ' +
             '(separated by a comma) corresponding to\n' +
             '\t\t[Std, Mean, Max, Min]\n' +
             '\tFor example, entering \'this_folder, 1100\' ' +
             'returns the Standard Deviation and the Mean.\n\tMean is taken by default (\'0100\').\n' +
             '\tTo set the radius, type \'r=[your value here]\' separated by a comma. Ex: \'folder,r=45,1111\'.\n\tThe default radius is 60px.\n' +
-            '\tTo display spot masks as they\'re generated, type \'mask=1\'. Turn it off with \'mask=0\'.')
+            '\tTo display spot masks as they\'re generated, type \'mgetinTimeBcask=1\'. Turn it off with \'mask=0\'.')
     # Change to true to display images with circles drawn on
     else:
         folder_name = (folder_name.replace(" ", "")).split(',')
@@ -361,9 +367,9 @@ def main_ui_analysis(args):
                     metrics = com
                 else:
                     print('\tInvalid setting input. Type \'help\'')
-            averagesOfAllImages(False, folder_name[0], metrics, int(radius))
+            averagesOfAllImages(False, folder_name[0], metrics, int(radius), time)
         else:
-            averagesOfAllImages(False, folder_name[0])
+            averagesOfAllImages(False, folder_name[0], timeOffset = time)
     return
 
 
