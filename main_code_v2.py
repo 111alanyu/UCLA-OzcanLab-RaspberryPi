@@ -13,7 +13,7 @@ m_thresh = 0.001
 time_touse = 4
 time_offset = 0 #Time offset from 0 min
 neg_analysis_flag = 1 #Whether to do outliers exclusion for zero
-zero_subtraction_flag = 1 #Whether to subtract 0 signal from all sensors or not
+zero_subtraction_flag = 0 #Whether to subtract 0 signal from all sensors or not
 
 #CHANGE THIS VALUE FOR EXLUDING OVERLAPING SPOTS
 accum_flag = 1 #whether to keep or exclude overlapping spots 0 - don't exclude, only borders (default), 1 - exclude all if >=3 spots are exluded, 2 - exclude all if >=1 spots are exluded
@@ -23,8 +23,8 @@ keep_zero_time = 0
 
 metric_flag = 1
 
-main_path = r'C:\Artem\VFA\Au-ion_reduction\outlier_analysis' #main path with the code
-sample_folder = r'C:\Artem\VFA\Au-ion_reduction\outlier_analysis\samples_10_19_22' #path with the data
+main_path = r'/Users/alanyu/Documents/Programming/EECE-194/RaspberryPi/UCLA-OzcanLab-RaspberryPi' #main path with the code
+sample_folder = r'/Users/alanyu/Documents/Programming/EECE-194/RaspberryPi/UCLA-OzcanLab-RaspberryPi/samples_10_19_22' #path with the data
 prediction_folder = 'samples_10_19_22' #folder to save predicted concentration
 features_folder = 'predicted_concentration_features' #folder to save predicted concentration
 
@@ -45,15 +45,15 @@ test_spots = [1, 2, 5, 6, 7, 8, 9, 10, 13, 14]
 Testing of a new sample
 '''
 
-data = np.loadtxt(open(main_path + '\\' + calibration_filename + '.csv'), delimiter=",")
+data = np.loadtxt(open(sample_folder + '/' + calibration_filename + '.csv'), delimiter=",")
 data_size = data.shape
 
 x_data = data[2: data_size[0], 2: data_size[1]]
 y_labels = data[1, 2:data_size[1]]
 zero_cols = np.where(y_labels==0)[0]
 
-testing_data = np.loadtxt(open(sample_folder + '\\' + test_filename + '.csv'), delimiter=",")
-data_zero = np.loadtxt(open(sample_folder + '\\' + zero_filename + '.csv'), delimiter=",")
+testing_data = np.loadtxt(open(sample_folder + '/' + test_filename + '.csv'), delimiter=",")
+data_zero = np.loadtxt(open(sample_folder + '/' + zero_filename + '.csv'), delimiter=",")
 
 data_size = testing_data.shape
 testing_data = testing_data[1:data_size[0], 1:data_size[1]]

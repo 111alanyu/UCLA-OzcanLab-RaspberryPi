@@ -269,9 +269,9 @@ def spot_exclusion_1sample_differential(xsample, data_inclusion_flag_sample, n_s
 
     for spot in range(n_spots):
         if keep_zero_time == 0:
-            spot_array = [np.int(x) for x in np.linspace(0, n_times - 1, n_times) * n_spots + spot]
+            spot_array = [np.int32(x) for x in np.linspace(0, n_times - 1, n_times) * n_spots + spot]
         else:
-            spot_array = [np.int(x) for x in np.linspace(1, n_times - 1, n_times-1) * n_spots + spot]
+            spot_array = [np.int32(x) for x in np.linspace(1, n_times - 1, n_times-1) * n_spots + spot]
             data_inclusion_flag_sample[neg_spots] = 2
             data_inclusion_flag_sample[test_spots] = 1
             xsample_processed[neg_spots] = xsample[neg_spots]
@@ -825,7 +825,7 @@ def error_accumulation(data_inclusion_flag_sample, xsample_processed, xsample, a
         for spot in range(n_spots):
             times = np.linspace(0, n_times - 1, n_times)
             spot_array = np.linspace(0, n_times - 1, n_times) * n_spots + spot
-            spot_array = np.array([np.int(x) for x in spot_array])
+            spot_array = np.array([np.int32(x) for x in spot_array])
             bool_array = np.logical_or(data_inclusion_flag_sample[spot_array]==-1, data_inclusion_flag_sample[spot_array]==-1)
             for spot_input in spot_array:
                 if (xsample_processed[spot_input] == -2 and np.sum(bool_array)<thresh):
@@ -843,7 +843,7 @@ def error_accumulation(data_inclusion_flag_sample, xsample_processed, xsample, a
             and_thresh = 10
         for spot in range(n_spots):
             spot_array = np.linspace(0, n_times - 1, n_times) * n_spots + spot
-            spot_array = np.array([np.int(x) for x in spot_array])
+            spot_array = np.array([np.int32(x) for x in spot_array])
             if accum_flag == 1:
                 bool_array = np.logical_or(data_inclusion_flag_sample[spot_array]==-1, data_inclusion_flag_sample[spot_array]==-1)
             elif accum_flag == 2:
@@ -973,8 +973,8 @@ def generate_output_data(testing_data, testing_data_mean, testing_data_std, test
     col1 = np.zeros((raw_data.shape[0], 1))
     col1[0, 0] = None
     for nspot in range(n_spots):
-        col1[nspot + 1, 0] = np.int(nspot + 1)
-        col1[nspot + 1 + n_spots + 2, 0] = np.int(nspot + 1)
+        col1[nspot + 1, 0] = np.int32(nspot + 1)
+        col1[nspot + 1 + n_spots + 2, 0] = np.int32(nspot + 1)
 
     col1[1 + n_spots, 0] = None
     col1[1 + n_spots + 1, 0] = None
