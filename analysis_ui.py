@@ -45,6 +45,9 @@ class MyFrame(tk.Frame):
         self.convert_jpg_to_tiff = tk.Button(self, text = "Convert Capture .jpg to .tiff", command = self.convert_to_tiff)
         self.convert_jpg_to_tiff.grid(row = 2, column = 2, columnspan = 2, sticky = "nsew")
         
+        self.next_analysis = tk.Button(self, text = "Next Step", command = self.next_step)
+        self.next_analysis.grid(row = 3, column = 2, columnspan = 2, sticky = "nsew")
+        
         self.image = Image.open("/home/pi/Desktop/campus-seal.jpg")
         self.resized_image = self.image.resize((500,400))
         self.image_tk = ImageTk.PhotoImage(self.resized_image)
@@ -59,7 +62,8 @@ class MyFrame(tk.Frame):
         
         self.curr_count = 0
         
-    
+    def next_step(self):
+        print("TTT")
     
     def convert_to_tiff(self):
         self.directory = self.capture_object.get_file()

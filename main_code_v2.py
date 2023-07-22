@@ -23,8 +23,8 @@ keep_zero_time = 0
 
 metric_flag = 1
 
-main_path = r'/Users/alanyu/Documents/Programming/EECE-194/RaspberryPi/UCLA-OzcanLab-RaspberryPi' #main path with the code
-sample_folder = r'/Users/alanyu/Documents/Programming/EECE-194/RaspberryPi/UCLA-OzcanLab-RaspberryPi/samples_10_19_22' #path with the data
+main_path = r'/home/pi/Desktop/Auionreduction/output_data_2023-07-12-21:58:04/csv' #main path with the code
+sample_folder = r'/home/pi/Desktop/alan/samples_10_19_22' #path with the data
 prediction_folder = 'samples_10_19_22' #folder to save predicted concentration
 features_folder = 'predicted_concentration_features' #folder to save predicted concentration
 
