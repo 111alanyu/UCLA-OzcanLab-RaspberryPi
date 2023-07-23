@@ -309,21 +309,21 @@ if differential_flag and neg_analysis_flag:
 
 
 raw_data = np.concatenate((xsample_processed, xdata_raw_0, xdata_raw_q), axis=0)
-if os.path.isdir(path + '\\' + prediction_folder) == False:
-    os.mkdir(path + '\\' + prediction_folder)
+if os.path.isdir(path + '/' + prediction_folder) == False:
+    os.mkdir(path + '/' + prediction_folder)
 
-np.savetxt(path + '\\' + prediction_folder + '\\' + test_filename + '_output_sig.csv', [signal_0, signal_q],
+np.savetxt(path + '/' + prediction_folder + '/' + test_filename + '_output_sig.csv', [signal_0, signal_q],
             delimiter=",")
-np.savetxt(path + '\\' + prediction_folder + '\\' + test_filename + '_margins.csv', thresh_all,
+np.savetxt(path + '/' + prediction_folder + '/' + test_filename + '_margins.csv', thresh_all,
             delimiter=",")
-np.savetxt(path + '\\' + prediction_folder + '\\' + test_filename + '_rawdata.csv', raw_data_combined, fmt='%s',
-            delimiter=",")
-
-if os.path.isdir(path + '\\' + features_folder) == False:
-    os.mkdir(path + '\\' + features_folder)
-
-np.savetxt(path + '\\' + features_folder + '\\' + test_filename + '_rawdata_features.csv', raw_data_feat_combined, fmt='%s',
+np.savetxt(path + '/' + prediction_folder + '/' + test_filename + '_rawdata.csv', raw_data_combined, fmt='%s',
             delimiter=",")
 
-np.savetxt(path + '\\' + features_folder + '\\' + test_filename + '_rawdata_iterations.csv', output_features_combined, fmt='%s',
+if os.path.isdir(path + '/' + features_folder) == False:
+    os.mkdir(path + '/' + features_folder)
+
+np.savetxt(path + '/' + features_folder + '/' + test_filename + '_rawdata_features.csv', raw_data_feat_combined, fmt='%s',
+            delimiter=",")
+
+np.savetxt(path + '/' + features_folder + '/' + test_filename + '_rawdata_iterations.csv', output_features_combined, fmt='%s',
             delimiter=",")
