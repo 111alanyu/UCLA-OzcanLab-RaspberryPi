@@ -32,3 +32,9 @@ In Analysis, you can either specify a path at the top OR use the images generate
 You can first convert the .jpg images to .tiff images by clicking on "Convert Capture .jpg to .tiff". This will perserve the .jpg images.
 
 Next you can click "Begin Analysis" that will mark the sensor with an overlay of circles. 
+
+## Attributions
+
+This repository has been made by Alan Yu (alanyu111@ucla.edu). Code in this repository was created, written, and modified by Alan. 
+
+Some code in this repository borrows code used previously in the Ozcan Reserach Group at UCLA.
