@@ -434,7 +434,7 @@ class PhotoBoothApp:
         inTimeBc = self.txtTimeBC.get("1.0", "end")
 
         #expT = int(inExpTxt)*1000*1000
-        quantify_VFA_timelapse_decap
+
         expT = [float(x.strip()) for x in inExpTxt.split(',')]
 
         expTBC = [float(x.strip()) for x in inTimeBc.split(',')]
@@ -485,7 +485,7 @@ class PhotoBoothApp:
             
                              
 
-        self.vs = VideoStream(usePiCamera=args["picamera"] > 0).start()
+        self.vs = VideoStream(usePiCamera=self.args["picamera"] > 0).start()
 
         time.sleep(0.5)
 

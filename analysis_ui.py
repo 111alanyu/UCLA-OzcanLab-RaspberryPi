@@ -104,7 +104,10 @@ class MyFrame(tk.Frame):
     def change_image(self):
         if(self.image_address == None):
             print("No Images to Display")
-        self.curr_count += 1
+        
+        if self.curr_count < len(self.image_address) - 1:
+            self.curr_count += 1
+        
         self.image = Image.open(self.image_address[self.curr_count % len(self.image_address)])
         self.resized_image = self.image.resize((500,500))
         self.image_tk = ImageTk.PhotoImage(self.resized_image)
@@ -114,7 +117,8 @@ class MyFrame(tk.Frame):
     def change_image_back(self):
         if(self.image_address == None):
             print("No Images to Display")
-        self.curr_count -= 1
+        if self.curr_count > 0: 
+            self.curr_count -= 1
         
         self.image = Image.open(self.image_address[self.curr_count])
         self.resized_image = self.image.resize((500,500))
