@@ -69,13 +69,19 @@ class MyFrame(tk.Frame):
         print("Reflog")
         
         sample_folder = self.output_path
-        a_output_path = "/home/pi/Desktop/temp_for_now"
+        a_output_path = self.directory + "/quality_control"
+        
+        if not os.path.exists(a_output_path):
+            os.mkdir(a_output_path)
+        
         features_folder = 'predicted_concentration_features'
         prediction_folder = 'pred'
         encapsulate(sample_folder, a_output_path, prediction_folder, features_folder, "mean_r=30_fixed", "std_r=30_fixed")
     
     def convert_to_tiff(self):
         self.directory = self.capture_object.get_file()
+        
+        print("YUHJ", self.directory)
         brightnesses = [1]
 
         print(self.directory)
