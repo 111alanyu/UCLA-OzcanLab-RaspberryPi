@@ -322,9 +322,10 @@ def encapsulate(file_path, output_path, prediction_folder_path, features_folder,
 
     if os.path.isdir(output_path + '/' + features_folder) == False:
         os.mkdir(output_path + '/' + features_folder)
-
-    np.savetxt(output_path + '/' + features_folder + '/' + test_spots + '_rawdata_features.csv', raw_data_feat_combined, fmt='%s',
+    
+    np.savetxt(output_path + '/' + features_folder + '/' + test + '_rawdata_features.csv', raw_data_feat_combined, fmt='%s',
                 delimiter=",")
+
 
     np.savetxt(output_path + '/' + features_folder + '/' + test + '_rawdata_iterations.csv', output_features_combined, fmt='%s',
                 delimiter=",")
@@ -335,7 +336,7 @@ def main():
     output_path = r'/home/pi/Desktop/Auionreduction/output_data_2023-07-12-21:58:04/csv' #main path with the code
     sample_folder = r'/home/pi/Desktop/alan/samples_10_19_22' #path with the data
     prediction_folder = 'samples_10_19_22' #folder to save predicted concentration
-    features_folder = 'predic/home/pi/Desktop/alanted_concentration_features' #folder to save predicted concentration
+    features_folder = 'predicted_concentration_features' #folder to save predicted concentration
     test_filename = 'testing_sample_0ng.mL_1' #name of the data file to test
     zero_filename = 'testing_sample_0ng.mL_2' #name of the data file to test
     encapsulate(sample_folder, output_path, prediction_folder, features_folder, zero_filename, test_filename)
