@@ -47,7 +47,7 @@ class MyFrame(tk.Frame):
         self.convert_jpg_to_tiff.grid(row = 2, column = 2, columnspan = 2, sticky = "nsew")
         
         self.next_analysis = tk.Button(self, text = "Next Step", command = self.next_step)
-        self.next_analysis.grid(row = 3, column = 2, columnspan = 2, sticky = "nsew")
+        self.next_analysis.grid(row = 2, column = 4, columnspan = 2, sticky = "nsew")
         
         self.image = Image.open("/home/pi/Desktop/campus-seal.jpg")
         self.resized_image = self.image.resize((500,400))
@@ -63,15 +63,22 @@ class MyFrame(tk.Frame):
         
         self.curr_count = 0
         
+        self.output_path = None
+        
     def next_step(self):
-        print("TTT")
+        print("Reflog")
+        
+        sample_folder = self.output_path
+        a_output_path = "/home/pi/Desktop/temp_for_now"
+        features_folder = 'predicted_concentration_features'
+        prediction_folder = 'pred'
+        encapsulate(sample_folder, a_output_path, prediction_folder, features_folder, "mean_r=30_fixed", "std_r=30_fixed")
     
     def convert_to_tiff(self):
         self.directory = self.capture_object.get_file()
         brightnesses = [1]
 
         print(self.directory)
-        
         if(not self.directory):
             print("Capture was not ran")
                     
@@ -91,7 +98,10 @@ class MyFrame(tk.Frame):
         print("$$$$" + (str)(self.file_path))
         
         print("~~~~" + (str)(self.capture_object.getinTimeBc))
-        main_ui_analysis(self.file_path, self.capture_object.getinTimeBc())
+        
+        self.output_path = main_ui_analysis(self.file_path, self.capture_object.getinTimeBc())
+        
+        print("%%%%" + self.output_path)
         
         self.process_image = self.file_path + "/processed_jpgs"
         self.image_address = [os.path.join(self.process_image, file) for file in os.listdir(self.process_image)]

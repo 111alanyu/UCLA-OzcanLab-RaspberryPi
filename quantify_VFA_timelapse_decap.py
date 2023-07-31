@@ -40,7 +40,7 @@ row_height = col_width
 #     '12': (2460, 2455),
 #     '13': (1465, 2785),
 #     '14': (1800, 2775),
-#     '15': (2125, 2780), 
+#     '15': (2125, 2780), quantify_VFA_timelapse_decap
 #     '16': (2455, 2785),
 #     '17': (1960, 2280)
 # }
@@ -202,7 +202,7 @@ def averagesOfAllImages(displayCirclesBool=False, test_directory_name="", stat_c
     NOTE: THE REPOSITORY THE USER ENTERS MUST BE INSIDE 'datasets' DIRECTORY.
 
     For each image, once it receives the intensity of each spot, it takes the information
-    and writes it to a csv file inside of the user-specified directory.
+    and writes it to a csv file inside of the user-speciftest_directory_nameied directory.
 
     E.g. Say that we have a directory named 'tiff-conv1' inside the 'datasets' directory
         Once the processing is done, inside 'datasets/tiff-conv1' there will be a csv file named 'tiff-conv1.csv'
@@ -286,7 +286,7 @@ def averagesOfAllImages(displayCirclesBool=False, test_directory_name="", stat_c
             j += 1
     end = time.time()
     print('Average runtime: ' + str((end - start) / len(imageList)))
-
+    return test_directory_path + 'csv/'
 
 def main():
     global show_mask
@@ -367,10 +367,10 @@ def main_ui_analysis(args, time):
                     metrics = com
                 else:
                     print('\tInvalid setting input. Type \'help\'')
-            averagesOfAllImages(False, folder_name[0], metrics, int(radius), time)
+            ret = averagesOfAllImages(False, folder_name[0], metrics, int(radius), time)
         else:
-            averagesOfAllImages(False, folder_name[0], timeOffset = time)
-    return
+            ret = averagesOfAllImages(False, folder_name[0], timeOffset = time)
+        return ret 
 
 
 if __name__ == '__main__':
