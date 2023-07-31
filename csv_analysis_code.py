@@ -341,5 +341,6 @@ def main():
     print('hello')
     encapsulate(sample_folder, zero_filename, test_filename)
 
-if "__name__" == "__main__":
+if __name__ == "__main__":
+    print('flag1')
     main()
