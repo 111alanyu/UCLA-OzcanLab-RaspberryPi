@@ -55,6 +55,8 @@ def encapsulate(file_path, output_path, prediction_folder_path, features_folder,
     testing_data = np.loadtxt(open(file_path + '/' + test + '.csv'), delimiter=",")
     data_zero = np.loadtxt(open(file_path + '/' + zero + '.csv'), delimiter=",")
 
+    print(testing_data)
+    print(data_zero)
     data_size = testing_data.shape
     testing_data = testing_data[1:data_size[0], 1:data_size[1]]
     data_zero = data_zero[1:data_size[0], 1:data_size[1]]
