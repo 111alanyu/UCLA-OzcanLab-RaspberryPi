@@ -23,19 +23,12 @@ keep_zero_time = 0
 
 metric_flag = 1
 
-main_path = r'/home/pi/Desktop/Auionreduction/output_data_2023-07-12-21:58:04/csv' #main path with the code
-sample_folder = r'/home/pi/Desktop/alan/samples_10_19_22' #path with the data
-prediction_folder = 'samples_10_19_22' #folder to save predicted concentration
-features_folder = 'predic/home/pi/Desktop/alanted_concentration_features' #folder to save predicted concentration
 
 
-test_filename = 'testing_sample_0ng.mL_1' #name of the data file to test
-zero_filename = 'testing_sample_0ng.mL_2' #name of the data file to test
-calibration_filename = 'data' #name of the data file to test
+
 
 
 time_touse = time_touse + time_offset
-path = main_path
 n_sigma = 1
 n_spots = 17
 pos_spots = [0, 15]
@@ -51,7 +44,7 @@ We will have two modes in running this, either it has been passed through or the
 Thus, we will use a boolean flag to check.
 '''
 
-def encapsulate(file_path, zero, test):
+def encapsulate(file_path, output_path, prediction_folder_path, features_folder, zero, test):
     data = np.loadtxt(open("/home/pi/Desktop/alan/data.csv"), delimiter=",") #this is a constant as per convo with Artem
     data_size = data.shape
 
@@ -317,29 +310,35 @@ def encapsulate(file_path, zero, test):
 
 
     raw_data = np.concatenate((xsample_processed, xdata_raw_0, xdata_raw_q), axis=0)
-    if os.path.isdir(path + '/' + prediction_folder) == False:
-        os.mkdir(path + '/' + prediction_folder)
+    if os.path.isdir(output_path + '/' + prediction_folder_path) == False:
+        os.mkdir(output_path + '/' + prediction_folder_path)
 
-    np.savetxt(path + '/' + prediction_folder + '/' + test_filename + '_output_sig.csv', [signal_0, signal_q],
+    np.savetxt(output_path + '/' + prediction_folder_path + '/' + test + '_output_sig.csv', [signal_0, signal_q],
                 delimiter=",")
-    np.savetxt(path + '/' + prediction_folder + '/' + test_filename + '_margins.csv', thresh_all,
+    np.savetxt(output_path + '/' + prediction_folder_path + '/' + test + '_margins.csv', thresh_all,
                 delimiter=",")
-    np.savetxt(path + '/' + prediction_folder + '/' + test_filename + '_rawdata.csv', raw_data_combined, fmt='%s',
-                delimiter=",")
-
-    if os.path.isdir(path + '/' + features_folder) == False:
-        os.mkdir(path + '/' + features_folder)
-
-    np.savetxt(path + '/' + features_folder + '/' + test_filename + '_rawdata_features.csv', raw_data_feat_combined, fmt='%s',
+    np.savetxt(output_path + '/' + prediction_folder_path + '/' + test + '_rawdata.csv', raw_data_combined, fmt='%s',
                 delimiter=",")
 
-    np.savetxt(path + '/' + features_folder + '/' + test_filename + '_rawdata_iterations.csv', output_features_combined, fmt='%s',
+    if os.path.isdir(output_path + '/' + features_folder) == False:
+        os.mkdir(output_path + '/' + features_folder)
+
+    np.savetxt(output_path + '/' + features_folder + '/' + test_spots + '_rawdata_features.csv', raw_data_feat_combined, fmt='%s',
+                delimiter=",")
+
+    np.savetxt(output_path + '/' + features_folder + '/' + test + '_rawdata_iterations.csv', output_features_combined, fmt='%s',
                 delimiter=",")
 
 
 def main(): 
     print('hello')
-    encapsulate(sample_folder, zero_filename, test_filename)
+    sample_folder = r'/home/pi/Desktop/alan/samples_10_19_22' #path with the data
+    output_path = r'/home/pi/Desktop/Auionreduction/output_data_2023-07-12-21:58:04/csv' #path where you want to output to
+    prediction_folder = 'samples_10_19_22' #folder to save predicted concentration
+    test_filename = 'testing_sample_0ng.mL_1'
+    zero_filename = 'testing_sample_0ng.mL_2'
+    feature_folder = 'predic/home/pi/Desktop/alanted_concentration_features'
+    encapsulate(sample_folder, output_path, prediction_folder, feature_folder, zero_filename, test_filename)
 
 if __name__ == "__main__":
     print('flag1')
