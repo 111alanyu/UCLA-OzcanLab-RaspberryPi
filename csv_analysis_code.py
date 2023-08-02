@@ -332,13 +332,13 @@ def encapsulate(file_path, output_path, prediction_folder_path, features_folder,
 
 def main(): 
     print('hello')
+    output_path = r'/home/pi/Desktop/Auionreduction/output_data_2023-07-12-21:58:04/csv' #main path with the code
     sample_folder = r'/home/pi/Desktop/alan/samples_10_19_22' #path with the data
-    output_path = r'/home/pi/Desktop/Auionreduction/output_data_2023-07-12-21:58:04/csv' #path where you want to output to
     prediction_folder = 'samples_10_19_22' #folder to save predicted concentration
-    test_filename = 'testing_sample_0ng.mL_1'
-    zero_filename = 'testing_sample_0ng.mL_2'
-    feature_folder = 'predic/home/pi/Desktop/alanted_concentration_features'
-    encapsulate(sample_folder, output_path, prediction_folder, feature_folder, zero_filename, test_filename)
+    features_folder = 'predic/home/pi/Desktop/alanted_concentration_features' #folder to save predicted concentration
+    test_filename = 'testing_sample_0ng.mL_1' #name of the data file to test
+    zero_filename = 'testing_sample_0ng.mL_2' #name of the data file to test
+    encapsulate(sample_folder, output_path, prediction_folder, features_folder, zero_filename, test_filename)
 
 if __name__ == "__main__":
     print('flag1')
