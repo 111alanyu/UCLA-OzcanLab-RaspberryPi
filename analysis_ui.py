@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from quantify_VFA_timelapse_decap import *
 from PIL import ImageTk, Image
+from csv_analysis_code import * 
 import os
 import glob
 

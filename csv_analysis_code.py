@@ -45,13 +45,13 @@ test_spots = [1, 2, 5, 6, 7, 8, 9, 10, 13, 14]
 Testing of a new sample
 '''
 
-def ui_calling_func(main_path, flags):
-    
-    '''
-    We will have two modes in running this, either it has been passed through or the file itself had been run
-    Thus, we will use a boolean flag to check.
-    '''
-    
+
+'''
+We will have two modes in running this, either it has been passed through or the file itself had been run
+Thus, we will use a boolean flag to check.
+'''
+
+def encapsulate(file_path, zero, test):
     data = np.loadtxt(open("/home/pi/Desktop/alan/data.csv"), delimiter=",") #this is a constant as per convo with Artem
     data_size = data.shape
 
@@ -59,8 +59,8 @@ def ui_calling_func(main_path, flags):
     y_labels = data[1, 2:data_size[1]]
     zero_cols = np.where(y_labels==0)[0]
 
-    testing_data = np.loadtxt(open(sample_folder + '/' + test_filename + '.csv'), delimiter=",")
-    data_zero = np.loadtxt(open(sample_folder + '/' + zero_filename + '.csv'), delimiter=",")
+    testing_data = np.loadtxt(open(file_path + '/' + test + '.csv'), delimiter=",")
+    data_zero = np.loadtxt(open(file_path + '/' + zero + '.csv'), delimiter=",")
 
     data_size = testing_data.shape
     testing_data = testing_data[1:data_size[0], 1:data_size[1]]
@@ -335,3 +335,11 @@ def ui_calling_func(main_path, flags):
 
     np.savetxt(path + '/' + features_folder + '/' + test_filename + '_rawdata_iterations.csv', output_features_combined, fmt='%s',
                 delimiter=",")
+
+
+def main(): 
+    print('hello')
+    encapsulate(sample_folder, zero_filename, test_filename)
+
+if "__name__" == "__main__":
+    main()
